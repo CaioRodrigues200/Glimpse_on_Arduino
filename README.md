@@ -1,2 +1,2 @@
-# Glimming_on_Arduino
+# Glimming on Arduino
  My first codes on Arduino UNO, whether for testing or learning
