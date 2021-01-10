@@ -1,6 +1,6 @@
 int YellowLED = 11;
 int GreenLED = 12;
-int BlueLED = 13
+int BlueLED = 13;
 
 //Declaring three constant variables associated with its own LED
 
