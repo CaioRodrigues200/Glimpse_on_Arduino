@@ -10,14 +10,15 @@ int precision_Ratio = 25; // Defines the percentage(%) between the right frequen
 
 int buzzer_Operation = 20; // Defines the buzzer operation interval
 
-int TargetValue;
-int Delay = 2000;
+int TargetValue; // Reference value to seek for
+int Delay = 2000; 
 float uniPot_voltage, tenPot_voltage;
 float unitPot_resValue, tenPot_resValue;
 float tenPot_maxResistance = 10; // Ten unit potentiometer resistance (in Kilo-ohms)
 float unitPot_maxResistance = 10; // Unit potentiometer resistance (in Kilo-ohms)
-float diff;
-unsigned int frequency = 0;
+float diff; // Difference between confirmed and target values
+unsigned int frequency = 0; // Sound frequency emitted by the buzzer
+float fltFreq; // Variable created for data conversion
 
 void setup(){
     Serial.begin(9600);
@@ -43,14 +44,16 @@ void loop(){
     tenPot_resValue = tenPot_maxResistance - ((10.0/1023.0) * tenPot_voltage); // Varies between 0 and 10
 
     diff = TargetValue - (unitPot_resValue + tenPot_resValue*10);  // Varies between (in module) 0 and 110
-    if(abs(diff) < buzzer_Operation){
-        frequency = 10000 - (abs(diff))*400;
+
+    if(abs(diff) < buzzer_Operation){ // Buzzer operation interval
+        fltFreq = 10000 - (abs(diff))*(8000/buzzer_Operation);
+        frequency = (unsigned int) fltFreq; // Converts float to unsigned int
         tone(buzzPin, frequency);
     }
     else
         noTone(buzzPin);
 
-    if(digitalRead(confirmPin) == HIGH){
+    if(digitalRead(confirmPin) == HIGH){ // Confirmation proceedment 
         noTone(buzzPin);
         if(abs(diff) < (buzzer_Operation * precision_Ratio)/100 )
             digitalWrite(greenLedPin, HIGH);
