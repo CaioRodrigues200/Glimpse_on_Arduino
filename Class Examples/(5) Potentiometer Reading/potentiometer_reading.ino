@@ -3,9 +3,8 @@
 #define SuitableBand 10
 #define HighBand      9
 
-float PotVoltage = 0; 
+float PotVoltage, PotResistance; 
 float PotMxResistance = 10; // Potentiometer maximum resistance in Kilo-Ohms
-float PotResistance;
 int Delay = 200;
 
 void setup(){
@@ -18,18 +17,20 @@ void setup(){
 
 void loop(){
   
-	PotVoltage = analogRead(PotPin);
+	  PotVoltage = analogRead(PotPin);
     PotResistance = PotMxResistance - ((10.0/1023.0) * PotVoltage);
+    // 
+
   	Serial.print("Potentiometer Resistance: ");
   	Serial.print(PotResistance);
- 	Serial.println("Kilo-Ohms");
+ 	  Serial.println("Kilo-Ohms");
   	
   	if(PotResistance >= 9){
       digitalWrite(HighBand, HIGH);
   	  digitalWrite(LowBand, LOW);
       digitalWrite(SuitableBand, LOW);
     }
- 	else if(PotResistance <= 1){
+ 	  else if(PotResistance <= 1){
       digitalWrite(HighBand, LOW);
   	  digitalWrite(LowBand, HIGH);
       digitalWrite(SuitableBand, LOW);

@@ -8,3 +8,8 @@
 ## Simulation software in usage:
 
 * [Tinkercad](https://www.tinkercad.com)
+
+## Arduino functionality references:
+
+* [Introduction to the Arduino board](https://www.arduino.cc/en/reference/board)
+* [PWM](https://www.arduino.cc/en/Tutorial/Foundations/PWM)
